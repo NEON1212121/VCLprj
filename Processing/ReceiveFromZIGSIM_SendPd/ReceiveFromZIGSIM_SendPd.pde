@@ -14,13 +14,6 @@ void setup() {
   /* start oscP5, listening for incoming messages at port 12000 */
   oscP5 = new OscP5(this,receivePort);
 
-  /* myRemoteLocation is a NetAddress. a NetAddress takes 2 parameters,
-   * an ip address and a port number. myRemoteLocation is used as parameter in
-   * oscP5.send() when sending osc packets to another computer, device, 
-   * application. usage see below. for testing purposes the listening port
-   * and the port of the remote location address are the same, hence you will
-   * send messages back to this sketch.
-   */
   myRemoteLocation = new NetAddress(sendIP,sendPort);
   
 }
@@ -32,18 +25,6 @@ void draw() {
   GraphUpdate();
 }
 
-void mousePressed() {
-  /* in the following different ways of creating osc messages are shown by example */
-  OscMessage myMessage = new OscMessage("/ZIGSIM/neonald/accel");
-
-  myMessage.add(mouseX); /* add an int to the osc message */
-
-  /* send the message */
-  oscP5.send(myMessage, myRemoteLocation);
-}
-
-
-/* incoming osc message are forwarded to the oscEvent method. */
 void oscEvent(OscMessage theOscMessage) {
   /* print the address pattern and the typetag of the received OscMessage */
   print("### received an osc message.");
@@ -59,6 +40,20 @@ void oscEvent(OscMessage theOscMessage) {
     myMessage.add(ay);
     az = theOscMessage.get(2).floatValue() * 10;
     myMessage.add(az);
+  
+    /* send the message */
+    oscP5.send(myMessage, myRemoteLocation); 
+  }
+  
+  if(theOscMessage.checkAddrPattern("/ZIGSIM/neonald/gyro") == true){
+    OscMessage myMessage = new OscMessage("/ZIGSIM/neonald/gyro");
+    
+    gx = theOscMessage.get(0).floatValue() * 10;
+    myMessage.add(gx);
+    gy = theOscMessage.get(1).floatValue() * 10;
+    myMessage.add(gy);
+    gz = theOscMessage.get(2).floatValue() * 10;
+    myMessage.add(gz);
   
     /* send the message */
     oscP5.send(myMessage, myRemoteLocation); 

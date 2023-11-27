@@ -1,4 +1,5 @@
 float ax, ay, az, a; //加速度
+float gx, gy, gz, g; //加速度
 float vx, vy, vz, v; //速度
 
 int historySize = 180;
