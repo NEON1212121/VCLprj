@@ -8,9 +8,11 @@ int receivePort = 9999;
 String sendIP = "127.0.0.1";
 int sendPort = 50000;
 
+int _frameRate = 100;
+
 void setup() {
   size(400,400);
-  frameRate(30);
+  frameRate(_frameRate);
   /* start oscP5, listening for incoming messages at port 12000 */
   oscP5 = new OscP5(this,receivePort);
 
