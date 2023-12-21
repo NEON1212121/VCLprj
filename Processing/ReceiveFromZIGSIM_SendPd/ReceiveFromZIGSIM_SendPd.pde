@@ -1,5 +1,7 @@
 import oscP5.*;
 import netP5.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 OscP5 oscP5;
 NetAddress myRemoteLocation;
@@ -18,6 +20,19 @@ void setup() {
 
   myRemoteLocation = new NetAddress(sendIP,sendPort);
   
+  // ローカルホスト名とIPアドレスを取得
+  try {
+    InetAddress addr = InetAddress.getLocalHost();
+    OscMessage myMessage = new OscMessage("/ZIGSIM/neonald/ipconfig");
+    myMessage.add(addr.getHostName());
+    myMessage.add(addr.getHostAddress());
+    /* send the message */
+    oscP5.send(myMessage, myRemoteLocation);
+    System.out.println("Local Host Name: " + addr.getHostName());
+    System.out.println("IP Address     : " + addr.getHostAddress());
+  } catch (UnknownHostException e) {
+    e.printStackTrace();
+  }
 }
 
 
@@ -44,7 +59,11 @@ void oscEvent(OscMessage theOscMessage) {
     myMessage.add(az);
   
     /* send the message */
-    oscP5.send(myMessage, myRemoteLocation); 
+    oscP5.send(myMessage, myRemoteLocation);
+    
+    myMessage = new OscMessage("/ZIGSIM/neonald/speed");
+    myMessage.add(v);
+    oscP5.send(myMessage, myRemoteLocation);
   }
   
   if(theOscMessage.checkAddrPattern("/ZIGSIM/neonald/gyro") == true){
