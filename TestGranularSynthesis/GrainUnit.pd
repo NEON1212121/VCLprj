@@ -27,7 +27,7 @@
 #X obj 529 169 loadbang;
 #X obj 388 340 expr 1 - pow(abs($f1 - 0.5)*2 \, 2);
 #X floatatom 566 319 5 0 0 0 - - - 0;
-#X msg 161 178 1;
+#X msg 160 200 1;
 #X obj 684 14 inlet;
 #X obj 684 38 switch~;
 #X connect 0 0 10 0;

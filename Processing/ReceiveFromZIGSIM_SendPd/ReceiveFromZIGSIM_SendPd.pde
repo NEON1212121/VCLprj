@@ -80,5 +80,16 @@ void oscEvent(OscMessage theOscMessage) {
     oscP5.send(myMessage, myRemoteLocation); 
   }
   
+  if(theOscMessage.checkAddrPattern("/ZIGSIM/neonald/gravity") == true){
+    OscMessage myMessage = new OscMessage("/ZIGSIM/neonald/gravity");
+    
+    myMessage.add(theOscMessage.get(0).floatValue() * 10);
+    myMessage.add(theOscMessage.get(1).floatValue() * 10);
+    myMessage.add(theOscMessage.get(2).floatValue() * 10);
+  
+    /* send the message */
+    oscP5.send(myMessage, myRemoteLocation); 
+  }
+  
   theOscMessage.print();
 }
