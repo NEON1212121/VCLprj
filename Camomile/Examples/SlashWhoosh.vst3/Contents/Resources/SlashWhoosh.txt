@@ -1,0 +1,10 @@
+param -name Window Size -label ms -min 0 -max 10000 -default 220;
+program short;
+program medium;
+program long;
+iolayout 2 2;
+code zWrt;
+type instrument;
+description Infos.txt;
+manufacturer Neo Ohara;
+compatibility 1.0.7;
