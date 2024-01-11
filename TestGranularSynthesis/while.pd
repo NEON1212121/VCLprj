@@ -1,4 +1,4 @@
-#N canvas 183 369 521 433 12;
+#N canvas 539 23 521 433 12;
 #X text 361 70 bang出力 内部でカウンターをセット、 上限行ったら右からbang;
 #X obj 88 372 outlet;
 #X obj 278 351 outlet;
@@ -21,9 +21,11 @@
 #X text 104 204 trueなら右から出力;
 #X text 23 230 falseは左;
 #X floatatom 71 77 8 0 0 0 - - - 0;
+#X obj 193 335 outlet;
 #X connect 3 0 16 2;
 #X connect 4 0 10 1;
 #X connect 4 0 16 1;
+#X connect 4 0 22 0;
 #X connect 5 0 16 0;
 #X connect 5 0 21 0;
 #X connect 6 0 10 0;
